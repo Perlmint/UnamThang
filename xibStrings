@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ $1 = "export" ]; then 
+	echo "Export Strings from xib"
+	find . -name "*.xib" | while read FILENAME;
+	do
+	  ibtool --export-strings-file $FILENAME.strings $FILENAME
+	done
+elif [ $1 = "import" ]; then
+	echo "Import Strings to xib"
+	find . -name "*.xib" | while read FILENAME;
+	do
+	  ibtool --import-strings-file $FILENAME.strings $FILENAME
+	done
+fi

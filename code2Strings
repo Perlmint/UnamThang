@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+find . -name "*.m" | while read FILENAME;
+do
+	cat $FILENAME | grep NSLocalizedString | perl -e 'while(<>) { print if (s/^.*NSLocalizedString\(@(".*"), @(".*"|nil)\);.*$/$1=""; \/\/ $2/);}' | cat Localizable.strings - | sort -zsu -k1 -t'='
+done
